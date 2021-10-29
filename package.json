@@ -1,0 +1,7 @@
+{
+  "name": "slime-floresta",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git remote add origin https://github.com/AiltonRafael/1st-project---IronHack---Game.git",
+  "license": "MIT"
+}
