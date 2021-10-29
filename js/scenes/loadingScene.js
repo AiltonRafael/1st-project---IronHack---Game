@@ -23,7 +23,8 @@ export default class loadingScene extends Phaser.Scene {
             this.scene.start('gameScene')
         })
 
-        this.load.image('forest', '../../assets/images/1-fase-florest.jpg')
+        this.load.image('sky', '../../assets/images/sky.gif')
+        this.load.video('video', '../../assets/video/sky.mp4', 'loadeddata', true, false)
         this.load.spritesheet('dude', '../../assets/images/dude.png', {frameWidth: 45, frameHeight: 49})
 
     }

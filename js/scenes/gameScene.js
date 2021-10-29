@@ -14,7 +14,9 @@ export default class gameScene extends Phaser.Scene{
     create(){
         const widthGame = this.sys.canvas.width;
         const heightGame = this.sys.canvas.height;
-        let image = this.add.image(widthGame/2, heightGame/2, 'forest');
+        // let video = this.add.video(widthGame/2, heightGame/2, 'video')
+        // video.play()
+        let image = this.add.image(widthGame/2, heightGame/2, 'sky');
         let scaleX = this.cameras.main.width / image.width;
         let scaleY = this.cameras.main.height / image.height;
         let scale = Math.max(scaleX, scaleY);
@@ -37,7 +39,8 @@ export default class gameScene extends Phaser.Scene{
           player.anims.play('left', true)
 
       } else {
-          player.setVelocityX(0)
+          player.setVelocityX(0);
+          player.anims.play('turn', true)
       }
     }
 
