@@ -7,7 +7,8 @@ export default class gameScene extends Phaser.Scene{
         });
         this.platforms;
         this.ground;
-        this.setCollider = [140, 36]
+        this.setCollider = [140, 36];
+        this.stars;
     }
 
 
@@ -26,25 +27,54 @@ export default class gameScene extends Phaser.Scene{
         this.platforms = this.physics.add.staticGroup();
         this.ground = this.physics.add.staticGroup();
 
+        this.stars = this.physics.add.group({
+            key: 'star',
+            repeat: 100,
+            setXY: { x: 0, y: 100, stepX: 70 },
+            setGravityY: -100,
+        });
+        
+        this.stars.children.iterate(function (child) {
+        
+            child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+        
+        });
+
         this.platforms.create(700, 450, 'Earth').setScale(0.2).refreshBody().body.setSize(110, 20);
         this.platforms.create(500, 380, 'Ice').setScale(0.2).refreshBody().body.setSize(110, 20);
         this.platforms.create(300, 310, 'Earth').setScale(0.2).refreshBody().body.setSize(110, 20);
         this.ground.create(800/2, 690, 'Earth').setScale(1).refreshBody().body.setSize(800, 400);
+        // this.physics.add.overlap(this.player, this.stars, collectStar, null, this);
+
+        // function collectStar (player, star){
+        //     star.disableBody(true, true);
+        // }
 
     
-        function gotFall(player, ground){
+        function gotFall(player){
             player.setX(700);
             player.setY(400);
         }
 
         this.player = new Player(this);
-        this.physics.add.collider(this.player.sprite, this.platforms)
-        this.physics.add.collider(this.player.sprite, this.ground, gotFall)
+        this.physics.add.collider(this.player.sprite, this.platforms);
+        this.physics.add.collider(this.player.sprite, this.ground, gotFall);
+        this.physics.add.collider(this.platforms, this.stars);
+        this.physics.add.overlap(this.platforms, this.stars, collectStar, null, this);
+
+        function collectStar (platforms, star){
+            star.disableBody(true, true);
+        }
 
         this.cursor = this.input.keyboard.createCursorKeys();
         
-
-
+        // setInterval(() => {
+        //     this.stars = this.physics.add.group({
+        //         key: 'star',
+        //         repeat: 100,
+        //         setXY: { x: 0, y: 100, stepX: 70 },
+        //     })
+        // }, 5000);
     }
 
     update(){
@@ -74,7 +104,6 @@ export default class gameScene extends Phaser.Scene{
                 player.anims.play('down', true)
             } 
             
-            if(this.player){}
     }  
 
 }

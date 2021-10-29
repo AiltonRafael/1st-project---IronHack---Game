@@ -23,6 +23,7 @@ export default class loadingScene extends Phaser.Scene {
             this.scene.start('gameScene')
         })
 
+        this.load.image('star', '../../assets/images/star.png')
         this.load.image('sky', '../../assets/images/sky.gif')
         this.load.image('Ice', '../../assets/images/platform-ice.png')
         this.load.image('Earth', '../../assets/images/pkatform-earth.png')
