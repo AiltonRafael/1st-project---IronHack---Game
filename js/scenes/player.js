@@ -29,6 +29,12 @@ export default class Player{
             frames: scene.anims.generateFrameNumbers('dude', {start: 0, end: 2}),
             frameRate: 10,
             repeat: -1
+        });
+        scene.anims.create({
+            key: 'up',
+            frames: scene.anims.generateFrameNumbers('dude', {start: 0, end: 2}),
+            frameRate: 10,
+            repeat: -1
         })
     }
 }

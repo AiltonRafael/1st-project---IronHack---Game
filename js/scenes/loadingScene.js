@@ -24,7 +24,8 @@ export default class loadingScene extends Phaser.Scene {
         })
 
         this.load.image('sky', '../../assets/images/sky.gif')
-        this.load.image('platformIce', '../../assets/images/platform-ice.png')
+        this.load.image('Ice', '../../assets/images/platform-ice.png')
+        this.load.image('Earth', '../../assets/images/pkatform-earth.png')
         this.load.video('video', '../../assets/video/sky.mp4', 'loadeddata', true, false)
         this.load.spritesheet('dude', '../../assets/images/dude.png', {frameWidth: 45, frameHeight: 49})
 

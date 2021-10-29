@@ -5,7 +5,9 @@ export default class gameScene extends Phaser.Scene{
         super({
             key: 'gameScene'
         });
+        this.platforms
     }
+
 
     create(){
         const widthGame = this.sys.canvas.width;
@@ -18,9 +20,15 @@ export default class gameScene extends Phaser.Scene{
         let scale = Math.max(scaleX, scaleY);
         image.setScale(scale).setScrollFactor(0);
 
-        this.player = new Player(this)
-        
-        this.cursor = this.input.keyboard.createCursorKeys()
+        this.platforms = this.physics.add.staticGroup();
+        this.platforms.create(700, 450, 'Earth').setScale(0.3).refreshBody();
+        this.platforms.create(600, 100, 'Ice').setScale(0.3).refreshBody();
+
+        this.player = new Player(this);
+        this.physics.add.collider(this.player.sprite, this.platforms)
+
+        this.cursor = this.input.keyboard.createCursorKeys();
+
     }
 
     update(){
@@ -42,7 +50,7 @@ export default class gameScene extends Phaser.Scene{
             }
             
         
-            if(this.cursor.up.isDown && player.body.touching.down){
+            if(this.cursor.up.isDown){
                 player.setVelocityY(-330);
                 player.anims.play('up', true)
             } else if(this.cursor.down.isDown) {
