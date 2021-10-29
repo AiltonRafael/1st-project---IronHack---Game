@@ -5,7 +5,8 @@ export default class gameScene extends Phaser.Scene{
         super({
             key: 'gameScene'
         });
-        this.platforms
+        this.platforms;
+        this.setCollider = [140, 36]
     }
 
 
@@ -20,9 +21,13 @@ export default class gameScene extends Phaser.Scene{
         let scale = Math.max(scaleX, scaleY);
         image.setScale(scale).setScrollFactor(0);
 
+
         this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(700, 450, 'Earth').setScale(0.3).refreshBody();
-        this.platforms.create(600, 100, 'Ice').setScale(0.3).refreshBody();
+        this.platforms.create(700, 450, 'Earth').setScale(0.3).refreshBody().body.setSize(140, 36);
+        this.platforms.create(500, 300, 'Ice').setScale(0.3).refreshBody().body.setSize(140, 36);
+        this.platforms.create(400, 200, 'Earth').setScale(0.3).refreshBody().body.setSize(140, 36);
+
+
 
         this.player = new Player(this);
         this.physics.add.collider(this.player.sprite, this.platforms)
@@ -51,7 +56,7 @@ export default class gameScene extends Phaser.Scene{
             
         
             if(this.cursor.up.isDown){
-                player.setVelocityY(-330);
+                player.setVelocityY(-230);
                 player.anims.play('up', true)
             } else if(this.cursor.down.isDown) {
                 player.setVelocityY(330)
