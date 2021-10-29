@@ -6,6 +6,7 @@ export default class gameScene extends Phaser.Scene{
             key: 'gameScene'
         });
         this.platforms;
+        this.ground;
         this.setCollider = [140, 36]
     }
 
@@ -23,16 +24,26 @@ export default class gameScene extends Phaser.Scene{
 
 
         this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(700, 450, 'Earth').setScale(0.3).refreshBody().body.setSize(140, 36);
-        this.platforms.create(500, 300, 'Ice').setScale(0.3).refreshBody().body.setSize(140, 36);
-        this.platforms.create(400, 200, 'Earth').setScale(0.3).refreshBody().body.setSize(140, 36);
+        this.ground = this.physics.add.staticGroup();
 
+        this.platforms.create(700, 450, 'Earth').setScale(0.2).refreshBody().body.setSize(110, 20);
+        this.platforms.create(500, 380, 'Ice').setScale(0.2).refreshBody().body.setSize(110, 20);
+        this.platforms.create(300, 310, 'Earth').setScale(0.2).refreshBody().body.setSize(110, 20);
+        this.ground.create(800/2, 690, 'Earth').setScale(1).refreshBody().body.setSize(800, 400);
 
+    
+        function gotFall(player, ground){
+            player.setX(700);
+            player.setY(400);
+        }
 
         this.player = new Player(this);
         this.physics.add.collider(this.player.sprite, this.platforms)
+        this.physics.add.collider(this.player.sprite, this.ground, gotFall)
 
         this.cursor = this.input.keyboard.createCursorKeys();
+        
+
 
     }
 
@@ -55,13 +66,15 @@ export default class gameScene extends Phaser.Scene{
             }
             
         
-            if(this.cursor.up.isDown){
-                player.setVelocityY(-230);
+            if(this.cursor.up.isDown && player.body.touching.down){
+                player.setVelocityY(-300);
                 player.anims.play('up', true)
             } else if(this.cursor.down.isDown) {
                 player.setVelocityY(330)
                 player.anims.play('down', true)
             } 
-    }
+            
+            if(this.player){}
+    }  
 
 }

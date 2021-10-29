@@ -1,7 +1,7 @@
 export default class Player{
     constructor(scene){
         this.scene = scene
-        this.sprite = scene.physics.add.sprite(800, 500, 'dude')
+        this.sprite = scene.physics.add.sprite(700, 400, 'dude')
         this.sprite.setBounce(0.2)
         this.sprite.setCollideWorldBounds(true)
 
