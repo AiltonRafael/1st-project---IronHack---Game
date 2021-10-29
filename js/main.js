@@ -12,7 +12,7 @@ import gameScene from './scenes/gameScene.js'
                 gravity: {
                     y: 100
                 },
-                debug: true
+                debug: false
             }
         },
         scene: [

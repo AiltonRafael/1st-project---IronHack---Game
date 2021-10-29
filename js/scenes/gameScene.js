@@ -25,7 +25,6 @@ export default class gameScene extends Phaser.Scene{
         let scale = Math.max(scaleX, scaleY);
         image.setScale(scale).setScrollFactor(0);
 
-
         this.platforms = this.physics.add.staticGroup();
         this.ground = this.physics.add.staticGroup();
 
@@ -117,7 +116,8 @@ export default class gameScene extends Phaser.Scene{
                 player.setVelocityY(330)
                 player.anims.play('down', true)
             } 
-            
+
+        
             // setInterval(() => {
             //     this.stars = this.physics.add.group({
             //         key: 'star',
