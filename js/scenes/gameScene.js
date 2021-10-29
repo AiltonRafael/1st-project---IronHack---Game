@@ -45,7 +45,14 @@ export default class gameScene extends Phaser.Scene{
         this.platforms.create(700, 450, 'Earth').setScale(0.2).refreshBody().body.setSize(110, 20);
         this.platforms.create(500, 380, 'Ice').setScale(0.2).refreshBody().body.setSize(110, 20);
         this.platforms.create(300, 310, 'Earth').setScale(0.2).refreshBody().body.setSize(110, 20);
+        this.platforms.create(500, 230, 'Ice').setScale(0.2).refreshBody().body.setSize(110, 20);
+        this.platforms.create(300, 180, 'Earth').setScale(0.2).refreshBody().body.setSize(110, 20);
+
+        this.platforms.create(100, 100, 'Earth').setScale(0.2).refreshBody().body.setSize(110, 20);
+
+
         this.ground.create(800/2, 690, 'Earth').setScale(1).refreshBody().body.setSize(800, 400);
+
        
 
         this.player = new Player(this);
