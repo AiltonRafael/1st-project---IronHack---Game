@@ -29,6 +29,8 @@ export default class gameScene extends Phaser.Scene{
 
     update(){
       const player = this.player.sprite
+
+      player.body.setGravityY(400)
     
       if(this.cursor.right.isDown){
           player.setVelocityX(160)
@@ -42,6 +44,11 @@ export default class gameScene extends Phaser.Scene{
           player.setVelocityX(0);
           player.anims.play('turn', true)
       }
+
+      if(this.cursor.up.isDown){
+        player.setVelocityY(-330)
+    }
+
     }
 
 }
