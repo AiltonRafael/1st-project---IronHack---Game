@@ -47,11 +47,6 @@ export default class gameScene extends Phaser.Scene{
         this.platforms.create(300, 310, 'Earth').setScale(0.2).refreshBody().body.setSize(110, 20);
         this.ground.create(800/2, 690, 'Earth').setScale(1).refreshBody().body.setSize(800, 400);
        
-    
-        function gotFall(player){
-            player.setX(700);
-            player.setY(400);
-        }
 
         this.player = new Player(this);
         this.physics.add.collider(this.player.sprite, this.platforms);
@@ -68,20 +63,25 @@ export default class gameScene extends Phaser.Scene{
         this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
         function collectStar (player, star){
-            // this.star.disableBody(true, true);
+            star.disableBody(true, true);
             this.score += 10;
             this.scoreText.setText('Score: ' + this.score);
         }
 
 
-        
-        // setInterval(() => {
-        //     this.stars = this.physics.add.group({
-        //         key: 'star',
-        //         repeat: 100,
-        //         setXY: { x: 0, y: 100, stepX: 70 },
-        //     })
-        // }, 5000);
+        function gotFall(player){
+            if(this.score > 0){
+                player.setX(700)
+                player.setY(400)
+                this.score = this.score - 10;
+            } else if(!this.score){
+                player.setX(700)
+                player.setY(400)
+                let scoreNew = (this.score - 10)
+                console.log(`Game Over ${this.score}`)
+            }
+        }
+
     }
 
     update(){
@@ -111,6 +111,13 @@ export default class gameScene extends Phaser.Scene{
                 player.anims.play('down', true)
             } 
             
+            // setInterval(() => {
+            //     this.stars = this.physics.add.group({
+            //         key: 'star',
+            //         repeat: 10,
+            //         setXY: { x: 0, y: 100, stepX: 70 },
+            //     })
+            // }, 5000);
     }  
 
 }
