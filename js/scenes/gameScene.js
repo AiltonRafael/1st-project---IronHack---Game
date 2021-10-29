@@ -9,6 +9,8 @@ export default class gameScene extends Phaser.Scene{
         this.ground;
         this.setCollider = [140, 36];
         this.stars;
+        this.score = 0
+        this.scoreText;
     }
 
 
@@ -29,7 +31,7 @@ export default class gameScene extends Phaser.Scene{
 
         this.stars = this.physics.add.group({
             key: 'star',
-            repeat: 100,
+            repeat: 11,
             setXY: { x: 0, y: 100, stepX: 70 },
             setGravityY: -100,
         });
@@ -44,12 +46,7 @@ export default class gameScene extends Phaser.Scene{
         this.platforms.create(500, 380, 'Ice').setScale(0.2).refreshBody().body.setSize(110, 20);
         this.platforms.create(300, 310, 'Earth').setScale(0.2).refreshBody().body.setSize(110, 20);
         this.ground.create(800/2, 690, 'Earth').setScale(1).refreshBody().body.setSize(800, 400);
-        // this.physics.add.overlap(this.player, this.stars, collectStar, null, this);
-
-        // function collectStar (player, star){
-        //     star.disableBody(true, true);
-        // }
-
+       
     
         function gotFall(player){
             player.setX(700);
@@ -60,13 +57,23 @@ export default class gameScene extends Phaser.Scene{
         this.physics.add.collider(this.player.sprite, this.platforms);
         this.physics.add.collider(this.player.sprite, this.ground, gotFall);
         this.physics.add.collider(this.platforms, this.stars);
-        this.physics.add.overlap(this.platforms, this.stars, collectStar, null, this);
+        this.physics.add.overlap(this.player.sprite, this.stars, collectStar, null, this);
 
-        function collectStar (platforms, star){
+        function collectStar (player, star){
             star.disableBody(true, true);
         }
 
         this.cursor = this.input.keyboard.createCursorKeys();
+
+        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+
+        function collectStar (player, star){
+            // this.star.disableBody(true, true);
+            this.score += 10;
+            this.scoreText.setText('Score: ' + this.score);
+        }
+
+
         
         // setInterval(() => {
         //     this.stars = this.physics.add.group({
