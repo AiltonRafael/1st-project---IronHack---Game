@@ -7,10 +7,6 @@ export default class gameScene extends Phaser.Scene{
         });
     }
 
-    preload(){
-
-    }
-
     create(){
         const widthGame = this.sys.canvas.width;
         const heightGame = this.sys.canvas.height;
@@ -23,32 +19,36 @@ export default class gameScene extends Phaser.Scene{
         image.setScale(scale).setScrollFactor(0);
 
         this.player = new Player(this)
-
+        
         this.cursor = this.input.keyboard.createCursorKeys()
     }
 
     update(){
-      const player = this.player.sprite
+        const player = this.player.sprite
 
-      player.body.setGravityY(400)
-    
-      if(this.cursor.right.isDown){
-          player.setVelocityX(160)
-          player.anims.play('right', true)
+            player.body.setGravityY(400)
+            
+            if(this.cursor.right.isDown){
+                player.setVelocityX(160)
+                player.anims.play('right', true)
 
-      } else if (this.cursor.left.isDown) {
-          player.setVelocityX(-160)
-          player.anims.play('left', true)
+            } else if (this.cursor.left.isDown) {
+                player.setVelocityX(-160)
+                player.anims.play('left', true)
 
-      } else {
-          player.setVelocityX(0);
-          player.anims.play('turn', true)
-      }
-
-      if(this.cursor.up.isDown){
-        player.setVelocityY(-330)
-    }
-
+            } else {
+                player.setVelocityX(0);
+                player.anims.play('turn', true)
+            }
+            
+        
+            if(this.cursor.up.isDown && player.body.touching.down){
+                player.setVelocityY(-330);
+                player.anims.play('up', true)
+            } else if(this.cursor.down.isDown) {
+                player.setVelocityY(330)
+                player.anims.play('down', true)
+            } 
     }
 
 }

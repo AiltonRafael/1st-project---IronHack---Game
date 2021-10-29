@@ -22,7 +22,13 @@ export default class Player{
             key: 'turn',
             frames: scene.anims.generateFrameNumbers('dude', {start: 1, end: 1}),
             frameRate: 10,
-            repeat: 0
+            repeat: -1
         });
+        scene.anims.create({
+            key: 'down',
+            frames: scene.anims.generateFrameNumbers('dude', {start: 0, end: 2}),
+            frameRate: 10,
+            repeat: -1
+        })
     }
 }
